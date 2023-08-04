@@ -170,7 +170,7 @@ services:
       - $DOCKER_PATH/nginxproxymanager:/data
       - $DOCKER_PATH/nginxproxymanager/letsencrypt:/etc/letsencrypt
   db:
-    image: "jc21/mariadb-aria:10.4"
+    image: "jc21/mariadb-aria:latest"
     environment:
       MYSQL_ROOT_PASSWORD: $MYSQL_ROOT_PASSWORD
       MYSQL_DATABASE: "npm"
