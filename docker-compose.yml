@@ -82,7 +82,7 @@ services:
     volumes:
       - $DOCKER_PATH/radarr:/config
       - $MEDIA_PATH/movies:/movies
-      - $COMPLETED_PATH:/completed
+      - $TORRENT_PATH:/data
   sonarr:
     image: linuxserver/sonarr:latest
     container_name: sonarr
@@ -96,7 +96,7 @@ services:
     volumes:
       - $DOCKER_PATH/sonarr:/config
       - $MEDIA_PATH/tv:/tv
-      - $COMPLETED_PATH:/completed
+      - $TORRENT_PATH:/data
   prowlarr:
     image: linuxserver/prowlarr:develop
     container_name: prowlarr
@@ -111,7 +111,7 @@ services:
       - TZ=$TZ
     volumes:
       - $DOCKER_PATH/prowlarr:/config
-      - $COMPLETED_PATH:/completed
+      - $TORRENT_PATH:/data
   overseerr:
     image: lscr.io/linuxserver/overseerr:latest
     container_name: overseerr
@@ -124,7 +124,7 @@ services:
       - $MEDIA_PATH:/media
       - $MEDIA_PATH/movies:/movies
       - $MEDIA_PATH/tv:/tv
-      - $COMPLETED_PATH:/completed
+      - $TORRENT_PATH:/data
     ports:
       - 5055:5055
     restart: unless-stopped
@@ -138,7 +138,7 @@ services:
     volumes:
       - $DOCKER_PATH/lidarr:/config
       - $MEDIA_PATH/music:/music
-      - $COMPLETED_PATH:/completed
+      - $TORRENT_PATH:/data
     ports:
       - 8686:8686
     restart: unless-stopped
@@ -152,7 +152,7 @@ services:
     volumes:
       - $DOCKER_PATH/readarr:/config
       - $MEDIA_PATH/books:/books
-      - $COMPLETED_PATH:/completed
+      - $TORRENT_PATH:/data
     ports:
       - 8787:8787
     restart: unless-stopped
