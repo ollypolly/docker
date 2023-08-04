@@ -10,6 +10,7 @@ services:
       - "/var/run/docker.sock:/var/run/docker.sock"
     image: willfarrell/autoheal
   watchtower:
+    container_name: watchtower
     image: containrrr/watchtower
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
@@ -172,7 +173,7 @@ services:
       - $DOCKER_PATH/nginxproxymanager:/data
       - $DOCKER_PATH/nginxproxymanager/letsencrypt:/etc/letsencrypt
   db:
-    container_name: nginx-proxy-manager-db
+    container_name: mariadb
     image: "jc21/mariadb-aria:latest"
     environment:
       MYSQL_ROOT_PASSWORD: $MYSQL_ROOT_PASSWORD
