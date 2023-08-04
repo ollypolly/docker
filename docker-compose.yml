@@ -159,7 +159,7 @@ services:
     ports:
       - "80:80"
       - "81:81"
-      - "443:443"
+      - "444:443"
     environment:
       DB_MYSQL_HOST: "db"
       DB_MYSQL_PORT: 3306
