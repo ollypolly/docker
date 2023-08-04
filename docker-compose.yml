@@ -158,7 +158,7 @@ services:
     restart: unless-stopped
   nginx-proxy-manager:
     container_name: nginx-proxy-manager
-    image: "jc21/nginx-proxy-manager:latest"
+    image: jc21/nginx-proxy-manager:latest
     ports:
       - "53394:80"
       - "13902:81"
@@ -174,7 +174,7 @@ services:
       - $DOCKER_PATH/nginxproxymanager/letsencrypt:/etc/letsencrypt
   mariadb:
     container_name: mariadb
-    image: "jc21/mariadb-aria:latest"
+    image: jc21/mariadb-aria:10.4.15-innodb
     environment:
       MYSQL_ROOT_PASSWORD: $MYSQL_ROOT_PASSWORD
       MYSQL_DATABASE: "npm"
