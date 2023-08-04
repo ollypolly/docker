@@ -1,0 +1,176 @@
+version: "2.1"
+services:
+  autoheal:
+    container_name: autoheal
+    restart: always
+    environment:
+      - AUTOHEAL_CONTAINER_LABEL=all
+      - TZ=$TZ
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock"
+    image: willfarrell/autoheal
+  portainer:
+    image: portainer/portainer-ce
+    container_name: portainer
+    restart: always
+    command: -H unix:///var/run/docker.sock
+    ports:
+      - 9000:9000
+      - 8000:8000
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - $DOCKER_PATH/portainer:/data
+    environment:
+      - TZ=$TZ
+  plex:
+    image: lscr.io/linuxserver/plex:latest
+    container_name: plex
+    network_mode: host
+    environment:
+      - PUID=$PUID
+      - PGID=$PGID
+      - TZ=Etc/UTC
+      - VERSION=docker
+      - PLEX_CLAIM=$PLEX_CLAIM
+    volumes:
+      - $DOCKER_PATH/plex:/config
+      - $MEDIA_PATH/movies:/movies
+      - $MEDIA_PATH/tv:/tv
+      - $MEDIA_PATH/music:/music
+    restart: unless-stopped
+  transmission:
+    restart: always
+    cap_add:
+      - NET_ADMIN
+    volumes:
+      - $DOCKER_PATH/transmission:/config
+      - $TORRENT_PATH:/data
+    environment:
+      - PUID=$PUID
+      - PGID=$PGID
+      - OPENVPN_PROVIDER=NORDVPN
+      - OPENVPN_USERNAME=$OPENVPN_USERNAME
+      - OPENVPN_PASSWORD=$OPENVPN_PASSWORD
+      - NORDVPN_COUNTRY=GB
+      - NORDVPN_SERVER=uk2023.nordvpn.com
+      - LOCAL_NETWORK=192.168.0.0/16
+      - TRANSMISSION_IDLE_SEEDING_LIMIT_ENABLED=true
+      - TRANSMISSION_RATIO_LIMIT_ENABLED=true
+    logging:
+      driver: json-file
+      options:
+        max-size: 10m
+    ports:
+      - "9091:9091"
+    image: haugene/transmission-openvpn
+  radarr:
+    image: linuxserver/radarr:latest
+    container_name: radarr
+    restart: always
+    ports:
+      - "7878:7878"
+    environment:
+      - PUID=$PUID
+      - PGID=$PGID
+      - TZ=$TZ
+    volumes:
+      - $DOCKER_PATH/radarr:/config
+      - $MEDIA_PATH/movies:/movies
+      - $COMPLETED_PATH:/completed
+  sonarr:
+    image: linuxserver/sonarr:latest
+    container_name: sonarr
+    restart: always
+    ports:
+      - "8989:8989"
+    environment:
+      - PUID=$PUID
+      - PGID=$PGID
+      - TZ=$TZ
+    volumes:
+      - $DOCKER_PATH/sonarr:/config
+      - $MEDIA_PATH/tv:/tv
+      - $COMPLETED_PATH:/completed
+  prowlarr:
+    image: linuxserver/prowlarr:develop
+    container_name: prowlarr
+    restart: always
+    ports:
+      - "9696:9696"
+    cap_add:
+      - NET_ADMIN
+    environment:
+      - PUID=$PUID
+      - PGID=$PGID
+      - TZ=$TZ
+    volumes:
+      - $DOCKER_PATH/prowlarr:/config
+      - $COMPLETED_PATH:/completed
+  overseerr:
+    image: lscr.io/linuxserver/overseerr:latest
+    container_name: overseerr
+    environment:
+      - PUID=$PUID
+      - PGID=$PGID
+      - TZ=$TZ
+    volumes:
+      - $DOCKER_PATH/overseerr:/config
+      - $MEDIA_PATH:/media
+      - $MEDIA_PATH/movies:/movies
+      - $MEDIA_PATH/tv:/tv
+      - $COMPLETED_PATH:/completed
+    ports:
+      - 5055:5055
+    restart: unless-stopped
+  lidarr:
+    image: lscr.io/linuxserver/lidarr:latest
+    container_name: lidarr
+    environment:
+      - PUID=$PUID
+      - PGID=$PGID
+      - TZ=$TZ
+    volumes:
+      - $DOCKER_PATH/lidarr:/config
+      - $MEDIA_PATH/music:/music
+      - $COMPLETED_PATH:/completed
+    ports:
+      - 8686:8686
+    restart: unless-stopped
+  readarr:
+    image: lscr.io/linuxserver/readarr:develop
+    container_name: readarr
+    environment:
+      - PUID=$PUID
+      - PGID=$PGID
+      - TZ=$TZ
+    volumes:
+      - $DOCKER_PATH/readarr:/config
+      - $MEDIA_PATH/books:/books
+      - $COMPLETED_PATH:/completed
+    ports:
+      - 8787:8787
+    restart: unless-stopped
+  app:
+    image: "jc21/nginx-proxy-manager:latest"
+    ports:
+      - "80:80"
+      - "81:81"
+      - "443:443"
+    environment:
+      DB_MYSQL_HOST: "db"
+      DB_MYSQL_PORT: 3306
+      DB_MYSQL_USER: $DB_MYSQL_USER
+      DB_MYSQL_PASSWORD: $DB_MYSQL_PASSWORD
+      DB_MYSQL_NAME: "npm"
+    volumes:
+      - $DOCKER_PATH/nginxproxymanager:/data
+      - $DOCKER_PATH/nginxproxymanager/letsencrypt:/etc/letsencrypt
+  db:
+    image: "jc21/mariadb-aria:10.4"
+    environment:
+      MYSQL_ROOT_PASSWORD: $MYSQL_ROOT_PASSWORD
+      MYSQL_DATABASE: "npm"
+      MYSQL_USER: $MYSQL_USER
+      MYSQL_PASSWORD: $MYSQL_PASSWORD
+    volumes:
+      - $DOCKER_PATH/nginxproxymanager/db:/var/lib/mysql

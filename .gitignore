@@ -1,0 +1,4 @@
+.env
+!docker-compose.yml
+!docker_launch.sh
+!.env.template
