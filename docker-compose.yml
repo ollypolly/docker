@@ -156,13 +156,13 @@ services:
     ports:
       - 8787:8787
     restart: unless-stopped
-  app:
+  nginx-proxy-manager:
     container_name: nginx-proxy-manager
     image: "jc21/nginx-proxy-manager:latest"
     ports:
-      - "80:80"
-      - "81:81"
-      - "444:443"
+      - "53394:80"
+      - "13902:81"
+      - "29937:443"
     environment:
       DB_MYSQL_HOST: "db"
       DB_MYSQL_PORT: 3306
@@ -172,7 +172,7 @@ services:
     volumes:
       - $DOCKER_PATH/nginxproxymanager:/data
       - $DOCKER_PATH/nginxproxymanager/letsencrypt:/etc/letsencrypt
-  db:
+  mariadb:
     container_name: mariadb
     image: "jc21/mariadb-aria:latest"
     environment:
