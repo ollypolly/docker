@@ -9,6 +9,10 @@ services:
     volumes:
       - "/var/run/docker.sock:/var/run/docker.sock"
     image: willfarrell/autoheal
+  watchtower:
+    image: containrrr/watchtower
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
   portainer:
     image: portainer/portainer-ce
     container_name: portainer
