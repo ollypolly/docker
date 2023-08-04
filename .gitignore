@@ -4,3 +4,4 @@
 !docker_launch.sh
 !.env.template
 !.gitignore
+!README.md
