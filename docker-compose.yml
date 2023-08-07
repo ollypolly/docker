@@ -194,6 +194,8 @@ services:
       - BASE_URL=/ombi #optional
     volumes:
       - $DOCKER_PATH/ombi:/config
+      - $MEDIA_PATH/music:/music
+      - $TORRENT_PATH:/data
     ports:
       - 3579:3579
     restart: unless-stopped
