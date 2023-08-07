@@ -54,4 +54,7 @@ create_folder "$DOCKER_PATH/nginxproxymanager"
 create_folder "$DOCKER_PATH/nginxproxymanager/db"
 create_folder "$DOCKER_PATH/nginxproxymanager/letsencrypt"
 
+# Ombi
+create_folder "$DOCKER_PATH/ombi"
+
 sudo docker-compose up -d --remove-orphans
