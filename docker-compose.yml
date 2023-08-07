@@ -199,3 +199,16 @@ services:
     ports:
       - 3579:3579
     restart: unless-stopped
+  docker-roonserver:
+    image: steefdebruijn/docker-roonserver:latest
+    container_name: docker-roonserver
+    hostname: docker-roonserver
+    network_mode: host
+    environment:
+      TZ: $TZ
+    volumes:
+      - $DOCKER_PATH/roon/app:/app
+      - $DOCKER_PATH/roon/backup:/backup
+      - $DOCKER_PATH/roon/data:/data
+      - $MEDIA_PATH/music:/music
+    restart: always

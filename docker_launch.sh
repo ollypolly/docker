@@ -57,4 +57,10 @@ create_folder "$DOCKER_PATH/nginxproxymanager/letsencrypt"
 # Ombi
 create_folder "$DOCKER_PATH/ombi"
 
+# Roon
+create_folder "$DOCKER_PATH/roon"
+create_folder "$DOCKER_PATH/roon/app"
+create_folder "$DOCKER_PATH/roon/data"
+create_folder "$DOCKER_PATH/roon/backup"
+
 sudo docker-compose up -d --remove-orphans
