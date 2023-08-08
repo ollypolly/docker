@@ -207,18 +207,18 @@ services:
       - $DOCKER_PATH/soulseek/shared:/data/Soulseek Shared Folder
       - $DOCKER_PATH/soulseek/logs:/data/Soulseek Chat Logs
       - $MEDIA_PATH/music:/data/music
-    restart: unless-stopped  
+    restart: unless-stopped
   pihole:
-	container_name: pihole
-	image: pihole/pihole:latest
-	ports:
-	  - "53:53/tcp"
-	  - "53:53/udp"
-	  - "80:80/tcp"
-	environment:
-	  TZ: $TZ
-	  WEBPASSWORD: $WEBPASSWORD
-	volumes:
-	  - $DOCKER_PATH/pihole/pihole:/etc/pihole
-	  - $DOCKER_PATH/pihole/dnsmasq.d:/etc/dnsmasq.d
-	restart: unless-stopped
+    container_name: pihole
+    image: pihole/pihole:latest
+    ports:
+      - "21177:53/tcp"
+      - "21177:53/udp"
+      - "47975:80/tcp"
+    environment:
+      TZ: $TZ
+      WEBPASSWORD: $WEBPASSWORD
+    volumes:
+      - $DOCKER_PATH/pihole/pihole:/etc/pihole
+      - $DOCKER_PATH/pihole/dnsmasq.d:/etc/dnsmasq.d
+    restart: unless-stopped
