@@ -219,6 +219,6 @@ services:
 	  TZ: $TZ
 	  WEBPASSWORD: $WEBPASSWORD
 	volumes:
-	  - '$DOCKER_PATH/pihole:/etc/pihole'
-	  - '$DOCKER_PATH/pihole/dnsmasq.d:/etc/dnsmasq.d'
+	  - $DOCKER_PATH/pihole/pihole:/etc/pihole
+	  - $DOCKER_PATH/pihole/dnsmasq.d:/etc/dnsmasq.d
 	restart: unless-stopped

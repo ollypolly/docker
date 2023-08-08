@@ -61,4 +61,9 @@ create_folder "$DOCKER_PATH/soulseek/downloads"
 create_folder "$DOCKER_PATH/soulseek/shared"
 create_folder "$DOCKER_PATH/soulseek/logs"
 
+# Pihole
+create_folder "$DOCKER_PATH/pihole"
+create_folder "$DOCKER_PATH/pihole/pihole"
+create_folder "$DOCKER_PATH/pihole/dnsmasq.d"
+
 sudo docker-compose up -d --remove-orphans
