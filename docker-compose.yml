@@ -218,7 +218,11 @@ services:
       - "21177:53/udp"
       - "47975:80/tcp"
     environment:
+      PGID: $PGID
+      PUID: $PUID
       TZ: $TZ
+      ServerIP: $SERVERIP
+      DNSMASQ_USER: root
       WEBPASSWORD: $WEBPASSWORD
     volumes:
       - $DOCKER_PATH/pihole/pihole:/etc/pihole
