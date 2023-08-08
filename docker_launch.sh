@@ -63,4 +63,11 @@ create_folder "$DOCKER_PATH/roon/app"
 create_folder "$DOCKER_PATH/roon/data"
 create_folder "$DOCKER_PATH/roon/backup"
 
+# Soulseek
+create_folder "$DOCKER_PATH/soulseek"
+create_folder "$DOCKER_PATH/soulseek/appdata"
+create_folder "$DOCKER_PATH/soulseek/downloads"
+create_folder "$DOCKER_PATH/soulseek/shared"
+create_folder "$DOCKER_PATH/soulseek/logs"
+
 sudo docker-compose up -d --remove-orphans

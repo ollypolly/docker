@@ -199,16 +199,20 @@ services:
     ports:
       - 3579:3579
     restart: unless-stopped
-  docker-roonserver:
-    image: steefdebruijn/docker-roonserver:latest
-    container_name: docker-roonserver
-    hostname: docker-roonserver
-    network_mode: host
+  soulseek:
+    container_name: soulseek
+    image: realies/soulseek:latest
+    platform: linux/amd64
+    build: .
     environment:
-      TZ: $TZ
+      - PGID=$PGID
+      - PUID=$PUID
+    ports:
+      - 6080:6080
     volumes:
-      - $DOCKER_PATH/roon/app:/app
-      - $DOCKER_PATH/roon/backup:/backup
-      - $DOCKER_PATH/roon/data:/data
-      - $MEDIA_PATH/music:/music
-    restart: always
+      - $DOCKER_PATH/soulseek/appdata:/data/.SoulseekQt
+      - $DOCKER_PATH/soulseek/downloads:/data/Soulseek Downloads
+      - $DOCKER_PATH/soulseek/shared:/data/Soulseek Shared Folder
+      - $DOCKER_PATH/soulseek/logs:/data/Soulseek Chat Logs
+      - $MEDIA_PATH/music:/data/music
+    restart: unless-stopped
