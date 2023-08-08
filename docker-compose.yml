@@ -203,7 +203,7 @@ services:
       - transmission
     volumes:
       - $DOCKER_PATH/soulseek/appdata:/data/.SoulseekQt
-      - $DOCKER_PATH/soulseek/downloads:/data/Soulseek Downloads
+      - $MEDIA_PATH/music:/data/Soulseek Downloads
       - $DOCKER_PATH/soulseek/shared:/data/Soulseek Shared Folder
       - $DOCKER_PATH/soulseek/logs:/data/Soulseek Chat Logs
       - $MEDIA_PATH/music:/data/music
