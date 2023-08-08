@@ -54,15 +54,6 @@ create_folder "$DOCKER_PATH/nginxproxymanager"
 create_folder "$DOCKER_PATH/nginxproxymanager/db"
 create_folder "$DOCKER_PATH/nginxproxymanager/letsencrypt"
 
-# Ombi
-create_folder "$DOCKER_PATH/ombi"
-
-# Roon
-create_folder "$DOCKER_PATH/roon"
-create_folder "$DOCKER_PATH/roon/app"
-create_folder "$DOCKER_PATH/roon/data"
-create_folder "$DOCKER_PATH/roon/backup"
-
 # Soulseek
 create_folder "$DOCKER_PATH/soulseek"
 create_folder "$DOCKER_PATH/soulseek/appdata"
