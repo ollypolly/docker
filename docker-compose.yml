@@ -211,8 +211,8 @@ services:
     container_name: pihole
     image: pihole/pihole:latest
     ports:
-      - "21177:53/tcp"
-      - "21177:53/udp"
+      - "53:53/tcp"
+      - "53:53/udp"
       - "47975:80/tcp"
     environment:
       PGID: $PGID
