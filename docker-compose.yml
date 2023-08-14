@@ -165,9 +165,9 @@ services:
     container_name: nginx-proxy-manager
     image: jc21/nginx-proxy-manager:latest
     ports:
-      - "53394:80"
+      - "80:80"
       - "13902:81"
-      - "29937:443"
+      - "443:443"
     environment:
       DB_MYSQL_HOST: "db"
       DB_MYSQL_PORT: 3306
