@@ -8,6 +8,14 @@ create_folder() {
     fi
 }
 
+# Function to create file if it doesn't exist
+create_file() {
+    if [ ! -f "$1" ]; then
+        touch "$1"
+        echo "Created file: $1"
+    fi
+}
+
 # Declare variables
 DOCKER_PATH="/volume1/docker"
 USB_PATH="/volumeUSB1/usbshare"
@@ -65,5 +73,9 @@ create_folder "$DOCKER_PATH/soulseek/logs"
 create_folder "$DOCKER_PATH/pihole"
 create_folder "$DOCKER_PATH/pihole/pihole"
 create_folder "$DOCKER_PATH/pihole/dnsmasq.d"
+
+# Dashy
+create_folder "$DOCKER_PATH/dashy"
+create_file "$DOCKER_PATH/dashy/config.yml"
 
 sudo docker-compose up -d --remove-orphans
