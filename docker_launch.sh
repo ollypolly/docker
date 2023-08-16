@@ -74,8 +74,4 @@ create_folder "$DOCKER_PATH/pihole"
 create_folder "$DOCKER_PATH/pihole/pihole"
 create_folder "$DOCKER_PATH/pihole/dnsmasq.d"
 
-# Dashy
-create_folder "$DOCKER_PATH/dashy"
-create_file "$DOCKER_PATH/dashy/config.yml"
-
 sudo docker-compose up -d --remove-orphans
