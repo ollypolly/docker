@@ -227,7 +227,7 @@ services:
     restart: unless-stopped
   mc:
     image: itzg/minecraft-server
-    container_name: paper
+    container_name: minecraft-server
     environment:
       EULA: "true"
       TYPE: PAPER
@@ -246,6 +246,7 @@ services:
     restart: unless-stopped
   backups:
     image: itzg/mc-backup
+    container_name: minecraft-backups
     environment:
       BACKUP_INTERVAL: "2h"
       RCON_HOST: mc
