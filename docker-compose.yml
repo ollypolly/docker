@@ -234,6 +234,8 @@ services:
       VIEW_DISTANCE: 10
       MEMORY: 2G
       WHITELIST: $WHITELIST
+      OPS: $OPS
+      MOTD: $MOTD
     ports:
       - "25565:25565"
     volumes:
