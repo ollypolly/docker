@@ -233,7 +233,7 @@ services:
       - 19132:19132
       - 19132:19132/udp
     volumes:
-      - minecraft:/minecraft
+      - $DOCKER_PATH/minecraft:/minecraft
     stdin_open: true
     tty: true
     entrypoint: ["/bin/bash", "/scripts/start.sh"]
