@@ -233,8 +233,8 @@ services:
       TYPE: PAPER
       VIEW_DISTANCE: 10
       MEMORY: 2G
-      WHITELIST: $WHITELIST
-      OPS: $OPS
+      WHITELIST_FILE: mc-lists/whitelist.txt
+      OPS_FILE: mc-lists/ops.txt
       MOTD: $MOTD
       PLUGINS: |
         https://download.geysermc.org/v2/projects/geyser/versions/latest/builds/latest/downloads/spigot
@@ -243,6 +243,8 @@ services:
       - "25565:25565"
     volumes:
       - $DOCKER_PATH/mc-paper:/data
+      - $DOCKER_PATH/mc-lists/whitelist.txt:/data/whitelist.txt
+      - $DOCKER_PATH/mc-lists/ops.txt:/data/ops.txt
     restart: unless-stopped
   backups:
     image: itzg/mc-backup
