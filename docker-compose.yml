@@ -233,6 +233,7 @@ services:
       TYPE: PAPER
       VIEW_DISTANCE: 10
       MEMORY: 2G
+      WHITELIST: $WHITELIST
     ports:
       - "25565:25565"
     volumes:
