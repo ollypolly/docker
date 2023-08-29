@@ -6,5 +6,3 @@
 !.gitignore
 !README.md
 !post-backup.sh
-!mc-lists/*
-!mc-lists

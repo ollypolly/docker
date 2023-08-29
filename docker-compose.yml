@@ -232,8 +232,6 @@ services:
       EULA: "true"
       TYPE: PAPER
       VIEW_DISTANCE: 10
-      WHITELIST_FILE: mc-lists/whitelist.txt
-      OPS_FILE: mc-lists/ops.txt
       MEMORY: 2G
       MOTD: $MOTD
       PLUGINS: |
@@ -245,8 +243,6 @@ services:
       - "19132:19132/udp"
     volumes:
       - $DOCKER_PATH/mc-paper:/data
-      - $DOCKER_PATH/mc-lists/whitelist.txt:/data/whitelist.txt
-      - $DOCKER_PATH/mc-lists/ops.txt:/data/ops.txt
     restart: unless-stopped
   backups:
     image: itzg/mc-backup
@@ -261,3 +257,6 @@ services:
       - $DOCKER_PATH/mc-paper:/data:ro
       - $DOCKER_PATH/mc-backups:/backups
       - $DOCKER_PATH/post-backup.sh:/post-backup.sh:ro
+    restart: unless-stopped
+    depends_on:
+      - mc
