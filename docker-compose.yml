@@ -241,3 +241,16 @@ services:
     volumes:
       - $DOCKER_PATH/mc-paper:/data
     restart: unless-stopped
+  backups:
+    image: itzg/mc-backup
+    environment:
+      BACKUP_INTERVAL: "2h"
+      RCON_HOST: mc
+      PRE_BACKUP_SCRIPT: |
+        echo "Before backup!"
+        echo "Also before backup from $$RCON_HOST to $$DEST_DIR"
+      POST_BACKUP_SCRIPT_FILE: /post-backup.sh
+    volumes:
+      - $DOCKER_PATH/mc-paper:/data:ro
+      - $DOCKER_PATH/mc-backups:/backups
+      - $DOCKER_PATH/post-backup.sh:/post-backup.sh:ro
