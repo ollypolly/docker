@@ -225,3 +225,22 @@ services:
       - $DOCKER_PATH/pihole/pihole:/etc/pihole
       - $DOCKER_PATH/pihole/dnsmasq.d:/etc/dnsmasq.d
     restart: unless-stopped
+  minecraftbe:
+    image: 05jchambers/legendary-minecraft-geyser-floodgate:latest
+    restart: "unless-stopped"
+    ports:
+      - 25565:25565
+      - 19132:19132
+      - 19132:19132/udp
+    volumes:
+      - minecraft:/minecraft
+    stdin_open: true
+    tty: true
+    entrypoint: ["/bin/bash", "/scripts/start.sh"]
+    environment:
+      Port: "25565"
+      BedrockPort: "19132"
+      TZ: $TZ
+volumes:
+  minecraft:
+    driver: local
