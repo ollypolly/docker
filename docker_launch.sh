@@ -75,6 +75,6 @@ create_folder "$DOCKER_PATH/pihole/pihole"
 create_folder "$DOCKER_PATH/pihole/dnsmasq.d"
 
 # Minecraft
-create_folder "$DOCKER_PATH/minecraft"
+create_folder "$DOCKER_PATH/mc-paper"
 
 sudo docker-compose up -d --remove-orphans
