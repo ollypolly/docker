@@ -229,10 +229,12 @@ services:
     image: itzg/minecraft-server
     container_name: minecraft-server
     environment:
+      PGID: $PGID
+      PUID: $PUID
       EULA: "true"
       TYPE: PAPER
       VIEW_DISTANCE: 10
-      MEMORY: 2G
+      MEMORY: 10G
       MOTD: $MOTD
       PLUGINS: |
         https://download.geysermc.org/v2/projects/geyser/versions/latest/builds/latest/downloads/spigot
