@@ -246,6 +246,7 @@ services:
     ports:
       - "25565:25565"
       - "19132:19132/udp"
+      - "24454:24454/udp"
     volumes:
       - $DOCKER_PATH/mc-paper:/data
     restart: unless-stopped
