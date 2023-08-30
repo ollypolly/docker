@@ -232,8 +232,11 @@ services:
       PGID: $PGID
       PUID: $PUID
       EULA: "true"
-      TYPE: PAPER
-      VIEW_DISTANCE: 10
+      TYPE: AUTO_CURSEFORGE
+      VERSION: 1.16.5
+      CF_API_KEY: $CF_API_KEY
+      CF_SLUG: servitor-mods
+      VIEW_DISTANCE: 8
       MEMORY: 10G
       MOTD: $MOTD
       PLUGINS: |
