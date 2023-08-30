@@ -226,7 +226,7 @@ services:
       - $DOCKER_PATH/pihole/dnsmasq.d:/etc/dnsmasq.d
     restart: unless-stopped
   mc:
-    image: itzg/minecraft-server
+    image: itzg/minecraft-server:java8
     container_name: minecraft-server
     environment:
       PGID: $PGID
