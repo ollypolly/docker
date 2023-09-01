@@ -264,3 +264,16 @@ services:
     restart: unless-stopped
     depends_on:
       - mc
+  code-server:
+    image: lscr.io/linuxserver/code-server:latest
+    container_name: code-server
+    environment:
+      - PUID=$PUID
+      - PGID=$PGID
+      - TZ=$TZ
+      - DEFAULT_WORKSPACE=/config/workspace
+    volumes:
+      - $DOCKER_PATH/vscode:/config
+    ports:
+      - 8443:8443
+    restart: unless-stopped
