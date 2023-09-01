@@ -239,9 +239,6 @@ services:
       VIEW_DISTANCE: 8
       MEMORY: 10G
       MOTD: $MOTD
-      PLUGINS: |
-        https://download.geysermc.org/v2/projects/geyser/versions/latest/builds/latest/downloads/spigot
-        https://download.geysermc.org/v2/projects/floodgate/versions/latest/builds/latest/downloads/spigot
       ICON: https://i.kym-cdn.com/profiles/icons/big/000/064/839/Markuspersson.jpg?1307769149
     ports:
       - "25565:25565"
