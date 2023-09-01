@@ -5,3 +5,4 @@
 !.env.template
 !.gitignore
 !README.md
+!post-backup.sh
