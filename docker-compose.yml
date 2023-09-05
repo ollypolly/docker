@@ -288,7 +288,8 @@ services:
       - TZ=$TZ
     volumes:
       - $DOCKER_PATH/sabnzbd:/config
-      - $USENET_PATH:/data
+      - $USENET_PATH/incomplete:/data/usenet/incomplete
+      - $USENET_PATH/completed:/data/usenet/completed
     ports:
       - 8080:8080
     restart: unless-stopped
