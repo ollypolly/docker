@@ -78,4 +78,8 @@ create_folder "$DOCKER_PATH/pihole/dnsmasq.d"
 create_folder "$DOCKER_PATH/mc-paper"
 create_folder "$DOCKER_PATH/mc-backups"
 
+# VSCode
+create_folder "$DOCKER_PATH/vscode"
+create_folder "$DOCKER_PATH/vscode/workspace"
+
 sudo docker-compose up -d --remove-orphans
