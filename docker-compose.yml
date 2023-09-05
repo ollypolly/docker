@@ -87,7 +87,7 @@ services:
     volumes:
       - $DOCKER_PATH/radarr:/config
       - $MEDIA_PATH/movies:/movies
-      - $TORRENT_PATH:/data
+      - $USB_PATH:/data
   sonarr:
     image: linuxserver/sonarr:latest
     container_name: sonarr
@@ -101,7 +101,7 @@ services:
     volumes:
       - $DOCKER_PATH/sonarr:/config
       - $MEDIA_PATH/tv:/tv
-      - $TORRENT_PATH:/data
+      - $USB_PATH:/data
   prowlarr:
     image: linuxserver/prowlarr:develop
     container_name: prowlarr
@@ -116,7 +116,7 @@ services:
       - TZ=$TZ
     volumes:
       - $DOCKER_PATH/prowlarr:/config
-      - $TORRENT_PATH:/data
+      - $USB_PATH:/data
   overseerr:
     image: lscr.io/linuxserver/overseerr:latest
     container_name: overseerr
@@ -129,7 +129,7 @@ services:
       - $MEDIA_PATH:/media
       - $MEDIA_PATH/movies:/movies
       - $MEDIA_PATH/tv:/tv
-      - $TORRENT_PATH:/data
+      - $USB_PATH:/data
     ports:
       - 5055:5055
     restart: unless-stopped
@@ -143,7 +143,7 @@ services:
     volumes:
       - $DOCKER_PATH/lidarr:/config
       - $MEDIA_PATH/music:/music
-      - $TORRENT_PATH:/data
+      - $USB_PATH:/data
     ports:
       - 8686:8686
     restart: unless-stopped
@@ -157,7 +157,7 @@ services:
     volumes:
       - $DOCKER_PATH/readarr:/config
       - $MEDIA_PATH/books:/books
-      - $TORRENT_PATH:/data
+      - $USB_PATH:/data
     ports:
       - 8787:8787
     restart: unless-stopped
@@ -278,4 +278,17 @@ services:
       - $DOCKER_PATH/vscode:/config
     ports:
       - 8443:8443
+    restart: unless-stopped
+  sabnzbd:
+    image: lscr.io/linuxserver/sabnzbd:latest
+    container_name: sabnzbd
+    environment:
+      - PUID=$PUID
+      - PGID=$PGID
+      - TZ=$TZ
+    volumes:
+      - $DOCKER_PATH/sabnzbd:/config
+      - $USENET_PATH:/data/usenet
+    ports:
+      - 8080:8080
     restart: unless-stopped

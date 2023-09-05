@@ -29,6 +29,12 @@ create_folder "$USB_PATH/torrents"
 create_folder "$USB_PATH/torrents/completed"
 create_folder "$USB_PATH/torrents/incomplete"
 
+# Saznzbd
+create_folder "$DOCKER_PATH/saznzbd"
+create_folder "$USB_PATH/usenet"
+create_folder "$USB_PATH/usenet/completed"
+create_folder "$USB_PATH/usenet/incomplete"
+
 # Media
 create_folder "$USB_PATH/media"
 create_folder "$USB_PATH/media/movies"
