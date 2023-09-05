@@ -163,6 +163,7 @@ services:
     restart: unless-stopped
   nginx-proxy-manager:
     container_name: nginx-proxy-manager
+    restart: always
     image: jc21/nginx-proxy-manager:latest
     ports:
       - "80:80"
@@ -182,6 +183,7 @@ services:
   db:
     container_name: mariadb
     image: "jc21/mariadb-aria:latest"
+    restart: always
     environment:
       MYSQL_ROOT_PASSWORD: $MYSQL_ROOT_PASSWORD
       MYSQL_DATABASE: "npm"
