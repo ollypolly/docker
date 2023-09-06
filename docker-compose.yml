@@ -238,13 +238,12 @@ services:
       VERSION: 1.16.5
       CF_API_KEY: $CF_API_KEY
       CF_SLUG: servitor-mods
-      VIEW_DISTANCE: 8
+      VIEW_DISTANCE: 12
       MEMORY: 10G
       MOTD: $MOTD
       ICON: https://i.kym-cdn.com/profiles/icons/big/000/064/839/Markuspersson.jpg?1307769149
     ports:
       - "25565:25565"
-      - "19132:19132/udp"
       - "24454:24454/udp"
     volumes:
       - $DOCKER_PATH/mc-paper:/data
