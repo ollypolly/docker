@@ -88,4 +88,11 @@ create_folder "$DOCKER_PATH/mc-backups"
 create_folder "$DOCKER_PATH/vscode"
 create_folder "$DOCKER_PATH/vscode/workspace"
 
+# Comics
+create_folder "$USB_PATH/media/comics"
+create_folder "$DOCKER_PATH/kapowarr"
+create_folder "$DOCKER_PATH/kapowarr/kapowarr-db"
+create_folder "$DOCKER_PATH/kapowarr/temp_downloads"
+create_folder "$DOCKER_PATH/komga"
+
 sudo docker-compose up -d --remove-orphans
