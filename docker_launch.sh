@@ -41,6 +41,7 @@ create_folder "$USB_PATH/media/movies"
 create_folder "$USB_PATH/media/tv"
 create_folder "$USB_PATH/media/music"
 create_folder "$USB_PATH/media/books"
+create_folder "$USB_PATH/media/manga"
 
 # Sonarr
 create_folder "$DOCKER_PATH/sonarr"
