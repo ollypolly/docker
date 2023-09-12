@@ -185,7 +185,7 @@ services:
       - $DOCKER_PATH/nginxproxymanager/letsencrypt:/etc/letsencrypt
     depends_on:
       - db
-  db:
+  mariadb:
     container_name: mariadb
     image: "jc21/mariadb-aria:latest"
     restart: always
@@ -342,7 +342,7 @@ services:
       - $DOCKER_PATH/kaizoku/config:/config
       - $DOCKER_PATH/kaizoku/logs:/logs
     depends_on:
-      db:
+      kaizoku-db:
         condition: service_healthy
     ports:
       - "3000:3000"
