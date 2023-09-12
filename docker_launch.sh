@@ -96,4 +96,9 @@ create_folder "$DOCKER_PATH/kapowarr/kapowarr-db"
 create_folder "$DOCKER_PATH/kapowarr/temp_downloads"
 create_folder "$DOCKER_PATH/komga"
 
+# Manga
+create_folder "$DOCKER_PATH/kaizoku"
+create_folder "$DOCKER_PATH/kaizoku/config"
+create_folder "$DOCKER_PATH/kaizoku/logs"
+
 sudo docker-compose up -d --remove-orphans

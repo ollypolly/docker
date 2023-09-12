@@ -1,4 +1,9 @@
 version: "2.1"
+
+volumes:
+  db:
+  redis:
+
 services:
   autoheal:
     container_name: autoheal
@@ -303,7 +308,6 @@ services:
       - $DOCKER_PATH/kapowarr/kapowarr-db:/app/db
       - $DOCKER_PATH/kapowarr/temp_downloads:/app/temp_downloads
       - $MEDIA_PATH/comics:/content
-      - $MEDIA_PATH/manga:/manga
     ports:
       - "5656:5656"
     image: "mrcas/kapowarr:latest"
@@ -322,3 +326,45 @@ services:
       - PGID=$PGID
       - TZ=$TZ
     restart: unless-stopped
+  kaizoku:
+    container_name: kaizoku
+    image: ghcr.io/oae/kaizoku:latest
+    environment:
+      - DATABASE_URL=postgresql://kaizoku:kaizoku@db:5432/kaizoku
+      - KAIZOKU_PORT=3000
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+      - PUID=$PUID
+      - PGID=$PGID
+      - TZ=$TZ
+    volumes:
+      - $MEDIA_PATH/manga:/manga
+      - $DOCKER_PATH/kaizoku/config:/config
+      - $DOCKER_PATH/kaizoku/logs:/logs
+    depends_on:
+      db:
+        condition: service_healthy
+    ports:
+      - "3000:3000"
+  redis:
+    image: redis:7-alpine
+    volumes:
+      - redis:/data
+  kaizoku-db:
+    image: postgres:alpine
+    container_name: kaizoku-db
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U kaizoku"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    environment:
+      - POSTGRES_USER=kaizoku
+      - POSTGRES_DB=kaizoku
+      - POSTGRES_PASSWORD=kaizoku
+      - PUID=$PUID
+      - PGID=$PGID
+      - TZ=$TZ
+    volumes:
+      - db:/var/lib/postgresql/data
