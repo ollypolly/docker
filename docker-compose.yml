@@ -303,7 +303,7 @@ services:
       - $DOCKER_PATH/kapowarr/kapowarr-db:/app/db
       - $DOCKER_PATH/kapowarr/temp_downloads:/app/temp_downloads
       - $MEDIA_PATH/comics:/content
-	    - $MEDIA_PATH/manga:/manga
+      - $MEDIA_PATH/manga:/manga
     ports:
       - "5656:5656"
     image: "mrcas/kapowarr:latest"
@@ -313,7 +313,7 @@ services:
     volumes:
       - $DOCKER_PATH/komga:/config
       - $MEDIA_PATH/comics:/comics
-	    - $MEDIA_PATH/manga:/manga
+      - $MEDIA_PATH/manga:/manga
       - $USB_PATH:/data
     ports:
       - 25600:25600
