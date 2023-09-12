@@ -378,6 +378,7 @@ services:
     volumes:
       - $DOCKER_PATH/calibre:/config
       - $MEDIA_PATH/books:/books
+      - PASSWORD=$CALIBRE_PASSWORD
     ports:
       - 8282:8080
       - 8181:8181
