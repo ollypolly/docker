@@ -175,7 +175,7 @@ services:
       - "13902:81"
       - "443:443"
     environment:
-      DB_MYSQL_HOST: "db"
+      DB_MYSQL_HOST: "mariadb"
       DB_MYSQL_PORT: 3306
       DB_MYSQL_USER: $MYSQL_USER
       DB_MYSQL_PASSWORD: $MYSQL_PASSWORD
