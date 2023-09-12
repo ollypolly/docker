@@ -184,7 +184,7 @@ services:
       - $DOCKER_PATH/nginxproxymanager:/data
       - $DOCKER_PATH/nginxproxymanager/letsencrypt:/etc/letsencrypt
     depends_on:
-      - db
+      - mariadb
   mariadb:
     container_name: mariadb
     image: "jc21/mariadb-aria:latest"
