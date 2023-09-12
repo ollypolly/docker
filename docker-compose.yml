@@ -368,3 +368,17 @@ services:
       - TZ=$TZ
     volumes:
       - db:/var/lib/postgresql/data
+  calibre:
+    image: lscr.io/linuxserver/calibre:latest
+    container_name: calibre
+    environment:
+      - PUID=$PUID
+      - PGID=$PGID
+      - TZ=$TZ
+    volumes:
+      - $DOCKER_PATH/calibre:/config
+    ports:
+      - 8282:8080
+      - 8181:8181
+      - 8081:8081
+    restart: unless-stopped
