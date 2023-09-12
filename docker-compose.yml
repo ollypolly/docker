@@ -330,7 +330,7 @@ services:
     container_name: kaizoku
     image: ghcr.io/oae/kaizoku:latest
     environment:
-      - DATABASE_URL=postgresql://kaizoku:kaizoku@db:5432/kaizoku
+      - DATABASE_URL=postgresql://kaizoku:kaizoku@kaizoku-db:5432/kaizoku
       - KAIZOKU_PORT=3000
       - REDIS_HOST=redis
       - REDIS_PORT=6379
@@ -377,6 +377,7 @@ services:
       - TZ=$TZ
     volumes:
       - $DOCKER_PATH/calibre:/config
+      - $MEDIA_PATH/books:/books
     ports:
       - 8282:8080
       - 8181:8181
