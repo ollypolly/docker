@@ -1,4 +1,9 @@
 version: "2.1"
+
+volumes:
+  db:
+  redis:
+
 services:
   autoheal:
     container_name: autoheal
@@ -170,7 +175,7 @@ services:
       - "13902:81"
       - "443:443"
     environment:
-      DB_MYSQL_HOST: "db"
+      DB_MYSQL_HOST: "mariadb"
       DB_MYSQL_PORT: 3306
       DB_MYSQL_USER: $MYSQL_USER
       DB_MYSQL_PASSWORD: $MYSQL_PASSWORD
@@ -179,8 +184,8 @@ services:
       - $DOCKER_PATH/nginxproxymanager:/data
       - $DOCKER_PATH/nginxproxymanager/letsencrypt:/etc/letsencrypt
     depends_on:
-      - db
-  db:
+      - mariadb
+  mariadb:
     container_name: mariadb
     image: "jc21/mariadb-aria:latest"
     restart: always
@@ -291,4 +296,91 @@ services:
       - $USENET_PATH/completed:/data/usenet/completed
     ports:
       - 8080:8080
+    restart: unless-stopped
+  kapowarr:
+    container_name: kapowarr
+    restart: always
+    environment:
+      - PUID=$PUID
+      - PGID=$PGID
+      - TZ=$TZ
+    volumes:
+      - $DOCKER_PATH/kapowarr/kapowarr-db:/app/db
+      - $DOCKER_PATH/kapowarr/temp_downloads:/app/temp_downloads
+      - $MEDIA_PATH/comics:/content
+    ports:
+      - "5656:5656"
+    image: "mrcas/kapowarr:latest"
+  komga:
+    image: gotson/komga:1.3.1
+    container_name: komga
+    volumes:
+      - $DOCKER_PATH/komga:/config
+      - $MEDIA_PATH/comics:/comics
+      - $MEDIA_PATH/manga:/manga
+      - $USB_PATH:/data
+    ports:
+      - 25600:25600
+    environment:
+      - PUID=$PUID
+      - PGID=$PGID
+      - TZ=$TZ
+    restart: unless-stopped
+  kaizoku:
+    container_name: kaizoku
+    image: ghcr.io/oae/kaizoku:latest
+    environment:
+      - DATABASE_URL=postgresql://kaizoku:kaizoku@kaizoku-db:5432/kaizoku
+      - KAIZOKU_PORT=3000
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+      - PUID=$PUID
+      - PGID=$PGID
+      - TZ=$TZ
+    volumes:
+      - $MEDIA_PATH/manga:/manga
+      - $DOCKER_PATH/kaizoku/config:/config
+      - $DOCKER_PATH/kaizoku/logs:/logs
+    depends_on:
+      kaizoku-db:
+        condition: service_healthy
+    ports:
+      - "3000:3000"
+  redis:
+    image: redis:7-alpine
+    volumes:
+      - redis:/data
+  kaizoku-db:
+    image: postgres:alpine
+    container_name: kaizoku-db
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U kaizoku"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    environment:
+      - POSTGRES_USER=kaizoku
+      - POSTGRES_DB=kaizoku
+      - POSTGRES_PASSWORD=kaizoku
+      - PUID=$PUID
+      - PGID=$PGID
+      - TZ=$TZ
+    volumes:
+      - db:/var/lib/postgresql/data
+  calibre:
+    image: lscr.io/linuxserver/calibre:latest
+    container_name: calibre
+    environment:
+      - PUID=$PUID
+      - PGID=$PGID
+      - TZ=$TZ
+      - PASSWORD=$CALIBRE_PASSWORD
+    volumes:
+      - $DOCKER_PATH/calibre:/config
+      - $MEDIA_PATH/books:/books
+    ports:
+      - 8282:8080
+      - 8181:8181
+      - 8081:8081
     restart: unless-stopped

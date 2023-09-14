@@ -41,6 +41,8 @@ create_folder "$USB_PATH/media/movies"
 create_folder "$USB_PATH/media/tv"
 create_folder "$USB_PATH/media/music"
 create_folder "$USB_PATH/media/books"
+create_folder "$USB_PATH/media/manga"
+create_folder "$USB_PATH/media/comics"
 
 # Sonarr
 create_folder "$DOCKER_PATH/sonarr"
@@ -87,5 +89,19 @@ create_folder "$DOCKER_PATH/mc-backups"
 # VSCode
 create_folder "$DOCKER_PATH/vscode"
 create_folder "$DOCKER_PATH/vscode/workspace"
+
+# Comics
+create_folder "$DOCKER_PATH/kapowarr"
+create_folder "$DOCKER_PATH/kapowarr/kapowarr-db"
+create_folder "$DOCKER_PATH/kapowarr/temp_downloads"
+create_folder "$DOCKER_PATH/komga"
+
+# Manga
+create_folder "$DOCKER_PATH/kaizoku"
+create_folder "$DOCKER_PATH/kaizoku/config"
+create_folder "$DOCKER_PATH/kaizoku/logs"
+
+# Books
+create_folder "$DOCKER_PATH/calibre"
 
 sudo docker-compose up -d --remove-orphans
