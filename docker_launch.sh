@@ -17,8 +17,8 @@ create_file() {
 }
 
 # Declare variables
-DOCKER_PATH="/volume1/docker"
-USB_PATH="/volumeUSB1/usbshare"
+DOCKER_PATH="/volume2/docker"
+USB_PATH="/volume2/data"
 
 # Plex
 create_folder "$DOCKER_PATH/plex"
