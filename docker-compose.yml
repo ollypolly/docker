@@ -384,3 +384,43 @@ services:
       - 8181:8181
       - 8081:8081
     restart: unless-stopped
+
+  unpackerr:
+    image: golift/unpackerr
+    container_name: unpackerr
+    volumes:
+      - $USB_PATH:/data
+    restart: always
+    user: ${PUID}:${PGID}
+    environment:
+      - TZ=${TZ}
+      # General config
+      - UN_DEBUG=false
+      - UN_LOG_FILES=10
+      - UN_LOG_FILE_MB=10
+      - UN_INTERVAL=2m
+      - UN_START_DELAY=1m
+      - UN_RETRY_DELAY=5m
+      - UN_MAX_RETRIES=3
+      - UN_PARALLEL=1
+      - UN_FILE_MODE=0644
+      - UN_DIR_MODE=0755
+      # Sonarr Configs
+      - UN_SONARR_0_URL=http://192.168.178.24:8989
+      - UN_SONARR_0_API_KEY=$SONARR_API_KEY
+      - UN_SONARR_0_PATHS_0=/data
+      - UN_SONARR_0_PROTOCOLS=usenet
+      - UN_SONARR_0_TIMEOUT=10s
+      - UN_SONARR_0_DELETE_ORIG=false
+      - UN_SONARR_0_DELETE_DELAY=5m
+      # Radarr Config
+      - UN_RADARR_0_URL=http://192.168.178.24:7878
+      - UN_RADARR_0_API_KEY=$RADARR_API_KEY
+      - UN_RADARR_0_PATHS_0=/data
+      - UN_RADARR_0_PROTOCOLS=usenet
+      - UN_RADARR_0_TIMEOUT=10s
+      - UN_RADARR_0_DELETE_ORIG=false
+      - UN_RADARR_0_DELETE_DELAY=5m
+
+    security_opt:
+      - no-new-privileges:true
