@@ -153,7 +153,7 @@ services:
       - 8686:8686
     restart: unless-stopped
   readarr:
-    image: lscr.io/linuxserver/readarr:develop
+    image: lscr.io/linuxserver/readarr:nightly
     container_name: readarr
     environment:
       - PUID=$PUID
