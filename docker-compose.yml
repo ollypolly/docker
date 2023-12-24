@@ -107,6 +107,7 @@ services:
     volumes:
       - $DOCKER_PATH/sonarr:/config
       - $MEDIA_PATH/tv:/tv
+      - $EXTERNAL_PATH/media/tv:/external_tv
       - $USB_PATH:/data
   prowlarr:
     image: linuxserver/prowlarr:develop
