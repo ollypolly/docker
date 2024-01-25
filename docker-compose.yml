@@ -433,7 +433,6 @@ services:
       - serve
     environment:
       - TZ=${TZ}
-    user: ${PUID}:${PGID}
     volumes:
       - $DOCKER_PATH/ntfy/cache:/var/cache/ntfy:rw
       - $DOCKER_PATH/ntfy:/etc/ntfy:rw
