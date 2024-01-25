@@ -426,3 +426,17 @@ services:
 
     security_opt:
       - no-new-privileges:true
+  ntfy:
+    image: binwiederhier/ntfy
+    container_name: ntfy
+    command:
+      - serve
+    environment:
+      - TZ=$TZ
+    user: $PUID:$PGID
+    volumes:
+      - /var/cache/ntfy:/var/cache/ntfy
+      - /etc/ntfy:/etc/ntfy
+    ports:
+      - 38158:80
+    restart: unless-stopped
