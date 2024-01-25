@@ -46,6 +46,7 @@ services:
       - $DOCKER_PATH/plex:/config
       - $MEDIA_PATH/movies:/movies
       - $MEDIA_PATH/tv:/tv
+      - $EXTERNAL_PATH:/external
       - $MEDIA_PATH/music:/music
     restart: unless-stopped
   transmission:
@@ -106,6 +107,7 @@ services:
     volumes:
       - $DOCKER_PATH/sonarr:/config
       - $MEDIA_PATH/tv:/tv
+      - $EXTERNAL_PATH/media/tv:/external_tv
       - $USB_PATH:/data
   prowlarr:
     image: linuxserver/prowlarr:develop
