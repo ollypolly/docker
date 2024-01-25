@@ -435,8 +435,8 @@ services:
       - TZ=${TZ}
     user: ${PUID}:${PGID}
     volumes:
-      - /var/cache/ntfy:/var/cache/ntfy
-      - /etc/ntfy:/etc/ntfy
+      - $DOCKER_PATH/ntfy/cache:/var/cache/ntfy:rw
+      - $DOCKER_PATH/ntfy:/etc/ntfy:rw
     ports:
       - 38158:80
     restart: unless-stopped
