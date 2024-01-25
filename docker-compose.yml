@@ -432,8 +432,8 @@ services:
     command:
       - serve
     environment:
-      - TZ=$TZ
-    user: $PUID:$PGID
+      - TZ=${TZ}
+    user: ${PUID}:${PGID}
     volumes:
       - /var/cache/ntfy:/var/cache/ntfy
       - /etc/ntfy:/etc/ntfy
