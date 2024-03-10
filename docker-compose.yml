@@ -426,3 +426,16 @@ services:
 
     security_opt:
       - no-new-privileges:true
+  ntfy:
+    image: binwiederhier/ntfy
+    container_name: ntfy
+    command:
+      - serve
+    environment:
+      - TZ=${TZ}
+    volumes:
+      - $DOCKER_PATH/ntfy/cache:/var/cache/ntfy:rw
+      - $DOCKER_PATH/ntfy:/etc/ntfy:rw
+    ports:
+      - 38158:80
+    restart: unless-stopped

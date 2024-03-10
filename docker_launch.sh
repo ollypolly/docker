@@ -104,4 +104,7 @@ create_folder "$DOCKER_PATH/kaizoku/logs"
 # Books
 create_folder "$DOCKER_PATH/calibre"
 
+create_folder "$DOCKER_PATH/ntfy"
+create_folder "$DOCKER_PATH/ntfy/cache"
+
 sudo docker-compose up -d --remove-orphans
