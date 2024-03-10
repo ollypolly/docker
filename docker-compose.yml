@@ -182,6 +182,8 @@ services:
       DB_MYSQL_USER: $MYSQL_USER
       DB_MYSQL_PASSWORD: $MYSQL_PASSWORD
       DB_MYSQL_NAME: "npm"
+      PGID: $PGID
+      PUID: $PUID
     volumes:
       - $DOCKER_PATH/nginxproxymanager:/data
       - $DOCKER_PATH/nginxproxymanager/letsencrypt:/etc/letsencrypt
