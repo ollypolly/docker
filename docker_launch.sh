@@ -107,4 +107,16 @@ create_folder "$DOCKER_PATH/calibre"
 create_folder "$DOCKER_PATH/ntfy"
 create_folder "$DOCKER_PATH/ntfy/cache"
 
-sudo docker-compose up -d --remove-orphans
+# Run docker compose on all files in docker-compose-files as one command
+sudo docker-compose up -d --remove-orphans \
+    -f $DOCKER_PATH/docker-compose-files/docker-compose.books-comics.yml \
+    -f $DOCKER_PATH/docker-compose-files/docker-compose.dl-clients.yml \
+    -f $DOCKER_PATH/docker-compose-files/docker-compose.meta.yml \
+    -f $DOCKER_PATH/docker-compose-files/docker-compose.minecraft.yml \
+    -f $DOCKER_PATH/docker-compose-files/docker-compose.misc.yml \
+    -f $DOCKER_PATH/docker-compose-files/docker-compose.music.yml \
+    -f $DOCKER_PATH/docker-compose-files/docker-compose.networking.yml \
+    -f $DOCKER_PATH/docker-compose-files/docker-compose.shows-movies.yml
+
+
+
