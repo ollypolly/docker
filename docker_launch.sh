@@ -108,20 +108,8 @@ create_folder "$DOCKER_PATH/calibre"
 create_folder "$DOCKER_PATH/ntfy"
 create_folder "$DOCKER_PATH/ntfy/cache"
 
-# Create array of all docker-compose files
-declare -a DOCKER_COMPOSE_FILES=(
-    "docker-compose.books-comics.yml"
-    "docker-compose.dl-clients.yml"
-    "docker-compose.meta.yml"
-    "docker-compose.minecraft.yml"
-    "docker-compose.misc.yml"
-    "docker-compose.music.yml"
-    "docker-compose.networking.yml"
-    "docker-compose.shows-movies.yml"
-)
-
 # Run docker compose on all files in docker-compose-files as one command
-sudo docker-compose --file "${DOCKER_COMPOSE_FILES[@]/#/$DOCKER_COMPOSE_PATH/}" up -d --remove-orphans 
+sudo docker-compose up -d --remove-orphans 
 
 
 

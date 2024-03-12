@@ -1,6 +1,7 @@
 /*
 !/docker-compose-files/
 !/docker-compose-files/**
+!docker-compose.yml
 !docker_launch.sh
 !.env.template
 !.gitignore
