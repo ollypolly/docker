@@ -18,6 +18,7 @@ create_file() {
 
 # Declare variables
 DOCKER_PATH="/volume1/docker"
+DOCKER_COMPOSE_PATH="$DOCKER_PATH/docker-compose-files"
 USB_PATH="/volume2/data"
 
 # Plex
@@ -120,7 +121,7 @@ declare -a DOCKER_COMPOSE_FILES=(
 )
 
 # Run docker compose on all files in docker-compose-files as one command
-sudo docker-compose --file "${DOCKER_COMPOSE_FILES[@]/#/$DOCKER_PATH/}" up -d --remove-orphans 
+sudo docker-compose --file "${DOCKER_COMPOSE_FILES[@]/#/$DOCKER_COMPOSE_PATH/}" up -d --remove-orphans 
 
 
 
