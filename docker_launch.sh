@@ -107,16 +107,20 @@ create_folder "$DOCKER_PATH/calibre"
 create_folder "$DOCKER_PATH/ntfy"
 create_folder "$DOCKER_PATH/ntfy/cache"
 
+# Create array of all docker-compose files
+declare -a DOCKER_COMPOSE_FILES=(
+    "docker-compose.books-comics.yml"
+    "docker-compose.dl-clients.yml"
+    "docker-compose.meta.yml"
+    "docker-compose.minecraft.yml"
+    "docker-compose.misc.yml"
+    "docker-compose.music.yml"
+    "docker-compose.networking.yml"
+    "docker-compose.shows-movies.yml"
+)
+
 # Run docker compose on all files in docker-compose-files as one command
-sudo docker-compose up -d --remove-orphans \
-    -f $DOCKER_PATH/docker-compose-files/docker-compose.books-comics.yml \
-    -f $DOCKER_PATH/docker-compose-files/docker-compose.dl-clients.yml \
-    -f $DOCKER_PATH/docker-compose-files/docker-compose.meta.yml \
-    -f $DOCKER_PATH/docker-compose-files/docker-compose.minecraft.yml \
-    -f $DOCKER_PATH/docker-compose-files/docker-compose.misc.yml \
-    -f $DOCKER_PATH/docker-compose-files/docker-compose.music.yml \
-    -f $DOCKER_PATH/docker-compose-files/docker-compose.networking.yml \
-    -f $DOCKER_PATH/docker-compose-files/docker-compose.shows-movies.yml
+sudo docker-compose --file "${DOCKER_COMPOSE_FILES[@]/#/$DOCKER_PATH/}" up -d --remove-orphans 
 
 
 
