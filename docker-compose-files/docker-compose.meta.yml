@@ -1,0 +1,38 @@
+# Meta containers for managing other containers
+
+# Autoheal: Restarts containers that have stopped
+# Watchtower: Updates containers to latest images
+# Portainer: Frontend for managing docker environment
+
+version: "2.1"
+
+services:
+  autoheal:
+    container_name: autoheal
+    restart: always
+    environment:
+      - AUTOHEAL_CONTAINER_LABEL=all
+      - TZ=$TZ
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock"
+    image: willfarrell/autoheal
+
+  watchtower:
+    container_name: watchtower
+    image: containrrr/watchtower
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+
+  portainer:
+    image: portainer/portainer-ce
+    container_name: portainer
+    restart: always
+    command: -H unix:///var/run/docker.sock
+    ports:
+      - 9000:9000
+      - 8000:8000
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - $DOCKER_PATH/portainer:/data
+    environment:
+      - TZ=$TZ

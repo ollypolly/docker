@@ -1,0 +1,42 @@
+# Docker images for managing music
+# Music is served with Plex (See docker-compose.shows-movies.yml)
+
+# Soulseek: Music downloader
+# Lidarr: Music collection manager
+
+version: "2.1"
+
+services:
+  soulseek:
+    container_name: soulseek
+    image: realies/soulseek:latest
+    platform: linux/amd64
+    build: .
+    environment:
+      - PGID=$PGID
+      - PUID=$PUID
+    network_mode: service:transmission
+    depends_on:
+      - transmission
+    volumes:
+      - $DOCKER_PATH/soulseek/appdata:/data/.SoulseekQt
+      - $MEDIA_PATH/music:/data/Soulseek Downloads
+      - $DOCKER_PATH/soulseek/shared:/data/Soulseek Shared Folder
+      - $DOCKER_PATH/soulseek/logs:/data/Soulseek Chat Logs
+      - $MEDIA_PATH/music:/data/music
+    restart: unless-stopped
+
+  lidarr:
+    image: lscr.io/linuxserver/lidarr:latest
+    container_name: lidarr
+    environment:
+      - PUID=$PUID
+      - PGID=$PGID
+      - TZ=$TZ
+    volumes:
+      - $DOCKER_PATH/lidarr:/config
+      - $MEDIA_PATH/music:/music
+      - $USB_PATH:/data
+    ports:
+      - 8686:8686
+    restart: unless-stopped
