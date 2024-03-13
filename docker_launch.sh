@@ -71,13 +71,6 @@ create_folder "$DOCKER_PATH/nginxproxymanager"
 create_folder "$DOCKER_PATH/nginxproxymanager/db"
 create_folder "$DOCKER_PATH/nginxproxymanager/letsencrypt"
 
-# Soulseek
-create_folder "$DOCKER_PATH/soulseek"
-create_folder "$DOCKER_PATH/soulseek/appdata"
-create_folder "$DOCKER_PATH/soulseek/downloads"
-create_folder "$DOCKER_PATH/soulseek/shared"
-create_folder "$DOCKER_PATH/soulseek/logs"
-
 # Pihole
 create_folder "$DOCKER_PATH/pihole"
 create_folder "$DOCKER_PATH/pihole/pihole"
@@ -101,9 +94,6 @@ create_folder "$DOCKER_PATH/komga"
 create_folder "$DOCKER_PATH/kaizoku"
 create_folder "$DOCKER_PATH/kaizoku/config"
 create_folder "$DOCKER_PATH/kaizoku/logs"
-
-# Books
-create_folder "$DOCKER_PATH/calibre"
 
 # Ntfy
 create_folder "$DOCKER_PATH/ntfy"

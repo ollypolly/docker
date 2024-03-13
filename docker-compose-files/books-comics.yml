@@ -5,7 +5,6 @@
 # Kaizoku: Manga downloader
 # Redis: Kaizoku dependency
 # Kaizoku-db: Kaizoku dependency
-# Calibre: Ebook manager
 # Readarr: Ebook downloader
 
 version: "2.1"
@@ -90,23 +89,6 @@ services:
       - TZ=$TZ
     volumes:
       - db:/var/lib/postgresql/data
-
-  calibre:
-    image: lscr.io/linuxserver/calibre:latest
-    container_name: calibre
-    environment:
-      - PUID=$PUID
-      - PGID=$PGID
-      - TZ=$TZ
-      - PASSWORD=$CALIBRE_PASSWORD
-    volumes:
-      - $DOCKER_PATH/calibre:/config
-      - $MEDIA_PATH/books:/books
-    ports:
-      - 8282:8080
-      - 8181:8181
-      - 8081:8081
-    restart: unless-stopped
 
   readarr:
     image: lscr.io/linuxserver/readarr:nightly
