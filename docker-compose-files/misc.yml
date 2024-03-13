@@ -26,6 +26,7 @@ services:
     command:
       - serve
     environment:
+      - NTFY_BASE_URL=https://ntfy.olly.live
       - TZ=${TZ}
     volumes:
       - $DOCKER_PATH/ntfy/cache:/var/cache/ntfy:rw
