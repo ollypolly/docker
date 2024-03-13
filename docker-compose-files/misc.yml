@@ -34,11 +34,13 @@ services:
       - NTFY_ATTACHMENT_CACHE_DIR=/var/lib/ntfy/attachments
       - NTFY_ENABLE_LOGIN=true
       - NTFY_UPSTREAM_BASE_URL=https://ntfy.sh
-      - NTFY_WEB_PUSH_PUBLIC_KEY=${NTFY_WEB_PUSH_PUBLIC_KEY}
-      - NTFY_WEB_PUSH_PRIVATE_KEY=${NTFY_WEB_PUSH_PRIVATE_KEY}
+      - NTFY_WEB_PUSH_PUBLIC_KEY=$NTFY_WEB_PUSH_PUBLIC_KEY
+      - NTFY_WEB_PUSH_PRIVATE_KEY=$NTFY_WEB_PUSH_PRIVATE_KEY
       - NTFY_WEB_PUSH_FILE=/var/lib/ntfy/webpush.db
-      - NTFY_WEB_PUSH_EMAIL_ADDRESS=${NTFY_WEB_PUSH_EMAIL_ADDRESS}
-      - TZ=${TZ}
+      - NTFY_WEB_PUSH_EMAIL_ADDRESS=$NTFY_WEB_PUSH_EMAIL_ADDRESS
+      - TZ=$TZ
+      - PUID=$PUID
+      - PGID=$PGID
     volumes:
       - $DOCKER_PATH/ntfy/cache:/var/cache/ntfy:rw
       - $DOCKER_PATH/ntfy:/etc/ntfy:rw
