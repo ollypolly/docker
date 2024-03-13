@@ -1,4 +1,8 @@
-# Run docker compose on all files in docker-compose-files as one command
+# Declare variables
+DOCKER_PATH="/volume1/docker"
+DOCKER_COMPOSE_PATH="$DOCKER_PATH/docker-compose-files"
+
+# Stop all containers
 sudo docker-compose \
     -f $DOCKER_COMPOSE_PATH/books-comics.yml \
     -f $DOCKER_COMPOSE_PATH/dl-clients.yml \
