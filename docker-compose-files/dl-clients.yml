@@ -27,6 +27,7 @@ services:
       - TRANSMISSION_RATIO_LIMIT_ENABLED=true
       - OVERRIDE_DNS_1=209.222.18.222
       - OVERRIDE_DNS_2=209.222.18.218
+      - OPENVPN_OPTS=--inactive 3600 --ping 10 --ping-exit 60
     logging:
       driver: json-file
       options:
