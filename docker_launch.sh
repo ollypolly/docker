@@ -115,6 +115,9 @@ create_file "$DOCKER_PATH/ntfy/auth.db"
 # Uptime kuma
 create_folder "$DOCKER_PATH/uptime-kuma"
 
+# Speedtest tracker
+create_folder "$DOCKER_PATH/speedtest-tracker"
+
 # Run docker compose on all files in docker-compose-files as one command
 sudo docker-compose \
     -f $DOCKER_COMPOSE_PATH/books-comics.yml \
