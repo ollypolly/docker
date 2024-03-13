@@ -17,8 +17,8 @@ services:
   speedtest-tracker:
     container_name: speedtest-tracker
     ports:
-      - 8080:80
-      - 8443:443
+      - 39979:80
+      - 30884:443
     environment:
       - PUID=$PUID
       - PGID=$PGID
