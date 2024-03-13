@@ -9,4 +9,4 @@ sudo docker-compose \
     -f $DOCKER_COMPOSE_PATH/music.yml \
     -f $DOCKER_COMPOSE_PATH/networking.yml \
     -f $DOCKER_COMPOSE_PATH/shows-movies.yml \
-    down -d --remove-orphans 
+    down
