@@ -1,0 +1,133 @@
+# Containers relative to managing and serving TV Shows and Movies
+
+# Plex: Media server
+# Radarr: Movie collection manager
+# Sonarr: TV collection manager
+# Prowlarr: Index manager for starr apps
+# Overseerr: Request manager for movies and tv shows
+# Unpackrr: Unzips files obtained from starr apps if needed
+
+version: "2.1"
+
+services:
+  plex:
+    image: lscr.io/linuxserver/plex:latest
+    container_name: plex
+    network_mode: host
+    environment:
+      - PUID=$PUID
+      - PGID=$PGID
+      - TZ=Etc/UTC
+      - VERSION=docker
+      - PLEX_CLAIM=$PLEX_CLAIM
+    volumes:
+      - $DOCKER_PATH/plex:/config
+      - $MEDIA_PATH/movies:/movies
+      - $MEDIA_PATH/tv:/tv
+      - $EXTERNAL_PATH:/external
+      - $MEDIA_PATH/music:/music
+    restart: unless-stopped
+
+  radarr:
+    image: linuxserver/radarr:latest
+    container_name: radarr
+    restart: always
+    ports:
+      - "7878:7878"
+    environment:
+      - PUID=$PUID
+      - PGID=$PGID
+      - TZ=$TZ
+    volumes:
+      - $DOCKER_PATH/radarr:/config
+      - $MEDIA_PATH/movies:/movies
+      - $USB_PATH:/data
+
+  sonarr:
+    image: linuxserver/sonarr:latest
+    container_name: sonarr
+    restart: always
+    ports:
+      - "8989:8989"
+    environment:
+      - PUID=$PUID
+      - PGID=$PGID
+      - TZ=$TZ
+    volumes:
+      - $DOCKER_PATH/sonarr:/config
+      - $MEDIA_PATH/tv:/tv
+      - $EXTERNAL_PATH/media/tv:/external_tv
+      - $USB_PATH:/data
+
+  prowlarr:
+    image: linuxserver/prowlarr:develop
+    container_name: prowlarr
+    restart: always
+    ports:
+      - "9696:9696"
+    cap_add:
+      - NET_ADMIN
+    environment:
+      - PUID=$PUID
+      - PGID=$PGID
+      - TZ=$TZ
+    volumes:
+      - $DOCKER_PATH/prowlarr:/config
+      - $USB_PATH:/data
+
+  overseerr:
+    image: lscr.io/linuxserver/overseerr:latest
+    container_name: overseerr
+    environment:
+      - PUID=$PUID
+      - PGID=$PGID
+      - TZ=$TZ
+    volumes:
+      - $DOCKER_PATH/overseerr:/config
+      - $MEDIA_PATH:/media
+      - $MEDIA_PATH/movies:/movies
+      - $MEDIA_PATH/tv:/tv
+      - $USB_PATH:/data
+    ports:
+      - 5055:5055
+    restart: unless-stopped
+
+  unpackerr:
+    image: golift/unpackerr
+    container_name: unpackerr
+    volumes:
+      - $USB_PATH:/data
+    restart: always
+    user: ${PUID}:${PGID}
+    environment:
+      - TZ=${TZ}
+      # General config
+      - UN_DEBUG=false
+      - UN_LOG_FILES=10
+      - UN_LOG_FILE_MB=10
+      - UN_INTERVAL=2m
+      - UN_START_DELAY=1m
+      - UN_RETRY_DELAY=5m
+      - UN_MAX_RETRIES=3
+      - UN_PARALLEL=1
+      - UN_FILE_MODE=0644
+      - UN_DIR_MODE=0755
+      # Sonarr Configs
+      - UN_SONARR_0_URL=http://192.168.178.24:8989
+      - UN_SONARR_0_API_KEY=$SONARR_API_KEY
+      - UN_SONARR_0_PATHS_0=/data
+      - UN_SONARR_0_PROTOCOLS=usenet
+      - UN_SONARR_0_TIMEOUT=10s
+      - UN_SONARR_0_DELETE_ORIG=false
+      - UN_SONARR_0_DELETE_DELAY=5m
+      # Radarr Config
+      - UN_RADARR_0_URL=http://192.168.178.24:7878
+      - UN_RADARR_0_API_KEY=$RADARR_API_KEY
+      - UN_RADARR_0_PATHS_0=/data
+      - UN_RADARR_0_PROTOCOLS=usenet
+      - UN_RADARR_0_TIMEOUT=10s
+      - UN_RADARR_0_DELETE_ORIG=false
+      - UN_RADARR_0_DELETE_DELAY=5m
+
+    security_opt:
+      - no-new-privileges:true

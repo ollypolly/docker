@@ -1,0 +1,47 @@
+# Minecraft server
+
+# minecraft-server: Docker minecraft server
+# mc-backup: Docker minecraft backup
+
+version: "2.1"
+
+services:
+  mc:
+    image: itzg/minecraft-server:java8
+    container_name: minecraft-server
+    environment:
+      PGID: $PGID
+      PUID: $PUID
+      EULA: "true"
+      TYPE: AUTO_CURSEFORGE
+      VERSION: 1.16.5
+      CF_API_KEY: $CF_API_KEY
+      CF_SLUG: servitor-mods
+      VIEW_DISTANCE: 12
+      MEMORY: 10G
+      MOTD: $MOTD
+      ICON: https://i.kym-cdn.com/profiles/icons/big/000/064/839/Markuspersson.jpg?1307769149
+    ports:
+      - "25565:25565"
+      - "24454:24454/udp"
+    volumes:
+      - $DOCKER_PATH/mc-paper:/data
+    restart: unless-stopped
+
+  backups:
+    image: itzg/mc-backup
+    container_name: minecraft-backups
+    environment:
+      BACKUP_INTERVAL: "2h"
+      RCON_HOST: mc
+      PRE_BACKUP_SCRIPT: |
+        echo "Before backup!"
+        echo "Also before backup from $$RCON_HOST to $$DEST_DIR"
+      POST_BACKUP_SCRIPT_FILE: /post-backup.sh
+    volumes:
+      - $DOCKER_PATH/mc-paper:/data:ro
+      - $DOCKER_PATH/mc-backups:/backups
+      - $DOCKER_PATH/post-backup.sh:/post-backup.sh:ro
+    restart: unless-stopped
+    depends_on:
+      - mc

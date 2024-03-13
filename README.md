@@ -1,7 +1,9 @@
 # Docker
+
 Synology NAS docker folder, provides a docker-compose.yml file for the containers and a docker_launch shell script for creating the neccesary volumes.
 
 ## Docker containers
+
 - Portainer - Conatainer manager, useful for restarting and seeing port numbers
 - Autoheal - Auto restarts unhealthy containers
 - Plex - Media server for serving media to networked devices
@@ -16,13 +18,18 @@ Synology NAS docker folder, provides a docker-compose.yml file for the container
 - MariaDB - Database for proxy manager
 
 ## To scaffold and run docker compose
+
 Create .env file
+
 ```bash
+cd docker-compose-files
 cp .env.template .env
 ```
+
 Add your environment variables to this file
 
 Run docker_launch script
+
 ```bash
 ./docker_launch.sh
 ```

@@ -1,0 +1,59 @@
+# Network config containers
+
+# Nginx Proxy Manager: Reverse Proxy manager
+# MariaDB: Database for Nginx Proxy Manager
+# PiHole: DNS server with adblocker
+
+version: "2.1"
+
+services:
+  nginx-proxy-manager:
+    container_name: nginx-proxy-manager
+    restart: always
+    image: jc21/nginx-proxy-manager:latest
+    ports:
+      - "80:80"
+      - "13902:81"
+      - "443:443"
+    environment:
+      DB_MYSQL_HOST: "mariadb"
+      DB_MYSQL_PORT: 3306
+      DB_MYSQL_USER: $MYSQL_USER
+      DB_MYSQL_PASSWORD: $MYSQL_PASSWORD
+      DB_MYSQL_NAME: "npm"
+    volumes:
+      - $DOCKER_PATH/nginxproxymanager:/data
+      - $DOCKER_PATH/nginxproxymanager/letsencrypt:/etc/letsencrypt
+    depends_on:
+      - mariadb
+
+  mariadb:
+    container_name: mariadb
+    image: "jc21/mariadb-aria:latest"
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: $MYSQL_ROOT_PASSWORD
+      MYSQL_DATABASE: "npm"
+      MYSQL_USER: $MYSQL_USER
+      MYSQL_PASSWORD: $MYSQL_PASSWORD
+    volumes:
+      - $DOCKER_PATH/nginxproxymanager/db:/var/lib/mysql
+
+  pihole:
+    container_name: pihole
+    image: pihole/pihole:latest
+    ports:
+      - "53:53/tcp"
+      - "53:53/udp"
+      - "47975:80/tcp"
+    environment:
+      PGID: $PGID
+      PUID: $PUID
+      TZ: $TZ
+      ServerIP: $SERVERIP
+      DNSMASQ_USER: root
+      WEBPASSWORD: $WEBPASSWORD
+    volumes:
+      - $DOCKER_PATH/pihole/pihole:/etc/pihole
+      - $DOCKER_PATH/pihole/dnsmasq.d:/etc/dnsmasq.d
+    restart: unless-stopped

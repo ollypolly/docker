@@ -1,0 +1,35 @@
+# Miscellaneous docker containers
+
+# Code server: Hosted VS Code
+# Ntfy: Notification server
+
+version: "2.1"
+
+services:
+  code-server:
+    image: lscr.io/linuxserver/code-server:latest
+    container_name: code-server
+    environment:
+      - PUID=$PUID
+      - PGID=$PGID
+      - TZ=$TZ
+      - DEFAULT_WORKSPACE=/config/workspace
+    volumes:
+      - $DOCKER_PATH/vscode:/config
+    ports:
+      - 8443:8443
+    restart: unless-stopped
+
+  ntfy:
+    image: binwiederhier/ntfy
+    container_name: ntfy
+    command:
+      - serve
+    environment:
+      - TZ=${TZ}
+    volumes:
+      - $DOCKER_PATH/ntfy/cache:/var/cache/ntfy:rw
+      - $DOCKER_PATH/ntfy:/etc/ntfy:rw
+    ports:
+      - 38158:80
+    restart: unless-stopped
