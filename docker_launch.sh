@@ -107,6 +107,16 @@ create_folder "$DOCKER_PATH/calibre"
 
 create_folder "$DOCKER_PATH/ntfy"
 create_folder "$DOCKER_PATH/ntfy/cache"
+create_folder "$DOCKER_PATH/ntfy/attachments"
+create_file "$DOCKER_PATH/ntfy/webpush.db"
+create_file "$DOCKER_PATH/ntfy/cache.db"
+create_file "$DOCKER_PATH/ntfy/auth.db"
+
+# Uptime kuma
+create_folder "$DOCKER_PATH/uptime-kuma"
+
+# Speedtest tracker
+create_folder "$DOCKER_PATH/speedtest-tracker"
 
 # Run docker compose on all files in docker-compose-files as one command
 sudo docker-compose \
@@ -115,6 +125,7 @@ sudo docker-compose \
     -f $DOCKER_COMPOSE_PATH/meta.yml \
     -f $DOCKER_COMPOSE_PATH/minecraft.yml \
     -f $DOCKER_COMPOSE_PATH/misc.yml \
+    -f $DOCKER_COMPOSE_PATH/monitoring.yml \
     -f $DOCKER_COMPOSE_PATH/music.yml \
     -f $DOCKER_COMPOSE_PATH/networking.yml \
     -f $DOCKER_COMPOSE_PATH/shows-movies.yml \

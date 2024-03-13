@@ -7,25 +7,6 @@
 version: "2.1"
 
 services:
-  soulseek:
-    container_name: soulseek
-    image: realies/soulseek:latest
-    platform: linux/amd64
-    build: .
-    environment:
-      - PGID=$PGID
-      - PUID=$PUID
-    network_mode: service:transmission
-    depends_on:
-      - transmission
-    volumes:
-      - $DOCKER_PATH/soulseek/appdata:/data/.SoulseekQt
-      - $MEDIA_PATH/music:/data/Soulseek Downloads
-      - $DOCKER_PATH/soulseek/shared:/data/Soulseek Shared Folder
-      - $DOCKER_PATH/soulseek/logs:/data/Soulseek Chat Logs
-      - $MEDIA_PATH/music:/data/music
-    restart: unless-stopped
-
   lidarr:
     image: lscr.io/linuxserver/lidarr:latest
     container_name: lidarr

@@ -3,6 +3,7 @@
 !/docker-compose-files/**
 !docker-compose.yml
 !docker_launch.sh
+!docker_stop.sh
 !.env.template
 !.gitignore
 !README.md
