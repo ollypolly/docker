@@ -33,3 +33,9 @@ Run docker_launch script
 ```bash
 ./docker_launch.sh
 ```
+
+To stop and remove all containers
+
+```bash
+./docker_stop.sh
+```
