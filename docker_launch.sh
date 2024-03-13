@@ -107,6 +107,7 @@ create_folder "$DOCKER_PATH/calibre"
 
 create_folder "$DOCKER_PATH/ntfy"
 create_folder "$DOCKER_PATH/ntfy/cache"
+create_file "$DOCKER_PATH/ntfy/webpush.db"
 
 # Uptime kuma
 create_folder "$DOCKER_PATH/uptime-kuma"

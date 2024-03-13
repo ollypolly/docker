@@ -37,6 +37,7 @@ services:
       - PGID=$PGID
     volumes:
       - $DOCKER_PATH/ntfy/cache:/var/cache/ntfy:rw
+      - $DOCKER_PATH/ntfy/webpush.db:/var/lib/ntfy/webpush.db:rw
       - $DOCKER_PATH/ntfy:/etc/ntfy:rw
     ports:
       - 38158:80
