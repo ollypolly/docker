@@ -105,6 +105,7 @@ create_folder "$DOCKER_PATH/kaizoku/logs"
 # Books
 create_folder "$DOCKER_PATH/calibre"
 
+# Ntfy
 create_folder "$DOCKER_PATH/ntfy"
 create_folder "$DOCKER_PATH/ntfy/cache"
 create_folder "$DOCKER_PATH/ntfy/attachments"
@@ -117,6 +118,9 @@ create_folder "$DOCKER_PATH/uptime-kuma"
 
 # Speedtest tracker
 create_folder "$DOCKER_PATH/speedtest-tracker"
+
+# Tautulli
+create_folder "$DOCKER_PATH/tautulli"
 
 # Run docker compose on all files in docker-compose-files as one command
 sudo docker-compose \
