@@ -1,0 +1,15 @@
+# Montioring related docker containers
+
+# Uptime Kuma: Uptime monitor
+
+version: "3.3"
+
+services:
+  uptime-kuma:
+    image: louislam/uptime-kuma:1
+    container_name: uptime-kuma
+    volumes:
+      - $DOCKER_PATH/uptime-kuma:/app/data
+    ports:
+      - 3001:3001
+    restart: always
