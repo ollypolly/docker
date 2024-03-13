@@ -38,7 +38,7 @@ services:
     volumes:
       - $DOCKER_PATH/tautulli:/config
     ports:
-      - 8181:8181
+      - 17795:8181
     restart: unless-stopped
 
   radarr:
