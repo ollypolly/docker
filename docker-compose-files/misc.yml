@@ -58,6 +58,10 @@ services:
     container_name: anisette-v3
     ports:
       - 6969:6969
+    environment:
+      - TZ=$TZ
+      - PUID=$PUID
+      - PGID=$PGID
     volumes:
       - $DOCKER_PATH/anisette:/home/Alcoholic/.config/anisette-v3/lib/
     image: dadoum/anisette-v3-server
