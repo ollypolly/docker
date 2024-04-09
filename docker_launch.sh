@@ -112,6 +112,9 @@ create_folder "$DOCKER_PATH/speedtest-tracker"
 # Tautulli
 create_folder "$DOCKER_PATH/tautulli"
 
+# Anisette server - for authenticting sidestore
+create_folder "$DOCKER_PATH/anisette"
+
 # Run docker compose on all files in docker-compose-files as one command
 sudo docker-compose \
     -f $DOCKER_COMPOSE_PATH/books-comics.yml \

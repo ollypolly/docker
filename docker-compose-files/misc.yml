@@ -2,6 +2,7 @@
 
 # Code server: Hosted VS Code
 # Ntfy: Notification server
+# Anisette-v3: Anisette-v3 server
 
 version: "2.1"
 
@@ -51,3 +52,12 @@ services:
     ports:
       - 38158:80
     restart: unless-stopped
+
+  anisette-v3-server:
+    restart: always
+    container_name: anisette-v3
+    ports:
+      - 6969:6969
+    volumes:
+      - $DOCKER_PATH/anisette:/home/Alcoholic/.config/anisette-v3/lib/
+    image: dadoum/anisette-v3-server
