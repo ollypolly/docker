@@ -17,9 +17,9 @@ create_file() {
 }
 
 # Declare variables
-DOCKER_PATH="/docker"
+DOCKER_PATH="./"
 DOCKER_COMPOSE_PATH="$DOCKER_PATH/docker-compose-files"
-DISK_PATH="../../../diskpool/"
+DISK_PATH="../../../diskpool"
 
 # Plex
 create_folder "$DOCKER_PATH/plex"
