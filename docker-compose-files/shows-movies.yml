@@ -126,7 +126,7 @@ services:
       - UN_FILE_MODE=0644
       - UN_DIR_MODE=0755
       # Sonarr Configs
-      - UN_SONARR_0_URL=http://192.168.178.24:8989
+      - UN_SONARR_0_URL=http://sonarr.servitor.home
       - UN_SONARR_0_API_KEY=$SONARR_API_KEY
       - UN_SONARR_0_PATHS_0=/data
       - UN_SONARR_0_PROTOCOLS=usenet
@@ -134,7 +134,7 @@ services:
       - UN_SONARR_0_DELETE_ORIG=false
       - UN_SONARR_0_DELETE_DELAY=5m
       # Radarr Config
-      - UN_RADARR_0_URL=http://192.168.178.24:7878
+      - UN_RADARR_0_URL=http://radarr.servitor.home
       - UN_RADARR_0_API_KEY=$RADARR_API_KEY
       - UN_RADARR_0_PATHS_0=/data
       - UN_RADARR_0_PROTOCOLS=usenet
