@@ -114,7 +114,7 @@ create_folder "$DOCKER_PATH/tautulli"
 
 # -f $DOCKER_COMPOSE_PATH/books-comics.yml \
     # -f $DOCKER_COMPOSE_PATH/dl-clients.yml \
-    
+    # -f $DOCKER_COMPOSE_PATH/networking.yml \
     # -f $DOCKER_COMPOSE_PATH/minecraft.yml \
     # -f $DOCKER_COMPOSE_PATH/misc.yml \
     # -f $DOCKER_COMPOSE_PATH/monitoring.yml \
@@ -122,7 +122,6 @@ create_folder "$DOCKER_PATH/tautulli"
     
 # Run docker compose on all files in docker-compose-files as one command
 sudo docker compose \
-    -f $DOCKER_COMPOSE_PATH/networking.yml \
     -f $DOCKER_COMPOSE_PATH/shows-movies.yml \
     -f $DOCKER_COMPOSE_PATH/meta.yml \
     up -d --remove-orphans 
