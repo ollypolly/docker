@@ -17,33 +17,33 @@ create_file() {
 }
 
 # Declare variables
-DOCKER_PATH="/volume1/docker"
+DOCKER_PATH="../docker"
 DOCKER_COMPOSE_PATH="$DOCKER_PATH/docker-compose-files"
-USB_PATH="/volume2/data"
+DISK_PATH="../../../diskpool"
 
 # Plex
 create_folder "$DOCKER_PATH/plex"
 
 # Transmission
 create_folder "$DOCKER_PATH/transmission"
-create_folder "$USB_PATH/torrents"
-create_folder "$USB_PATH/torrents/completed"
-create_folder "$USB_PATH/torrents/incomplete"
+create_folder "$DISK_PATH/torrents"
+create_folder "$DISK_PATH/torrents/completed"
+create_folder "$DISK_PATH/torrents/incomplete"
 
 # Sabnzbd
 create_folder "$DOCKER_PATH/sabnzbd"
-create_folder "$USB_PATH/usenet"
-create_folder "$USB_PATH/usenet/completed"
-create_folder "$USB_PATH/usenet/incomplete"
+create_folder "$DISK_PATH/usenet"
+create_folder "$DISK_PATH/usenet/completed"
+create_folder "$DISK_PATH/usenet/incomplete"
 
 # Media
-create_folder "$USB_PATH/media"
-create_folder "$USB_PATH/media/movies"
-create_folder "$USB_PATH/media/tv"
-create_folder "$USB_PATH/media/music"
-create_folder "$USB_PATH/media/books"
-create_folder "$USB_PATH/media/manga"
-create_folder "$USB_PATH/media/comics"
+create_folder "$DISK_PATH/media"
+create_folder "$DISK_PATH/media/movies"
+create_folder "$DISK_PATH/media/tv"
+create_folder "$DISK_PATH/media/music"
+create_folder "$DISK_PATH/media/books"
+create_folder "$DISK_PATH/media/manga"
+create_folder "$DISK_PATH/media/comics"
 
 # Sonarr
 create_folder "$DOCKER_PATH/sonarr"
@@ -111,18 +111,13 @@ create_folder "$DOCKER_PATH/speedtest-tracker"
 
 # Tautulli
 create_folder "$DOCKER_PATH/tautulli"
-
+    
 # Run docker compose on all files in docker-compose-files as one command
-sudo docker-compose \
-    -f $DOCKER_COMPOSE_PATH/books-comics.yml \
-    -f $DOCKER_COMPOSE_PATH/dl-clients.yml \
-    -f $DOCKER_COMPOSE_PATH/meta.yml \
-    -f $DOCKER_COMPOSE_PATH/minecraft.yml \
-    -f $DOCKER_COMPOSE_PATH/misc.yml \
-    -f $DOCKER_COMPOSE_PATH/monitoring.yml \
-    -f $DOCKER_COMPOSE_PATH/music.yml \
-    -f $DOCKER_COMPOSE_PATH/networking.yml \
+sudo docker compose \
     -f $DOCKER_COMPOSE_PATH/shows-movies.yml \
+    -f $DOCKER_COMPOSE_PATH/meta.yml \
+    -f $DOCKER_COMPOSE_PATH/networking.yml \
+    -f $DOCKER_COMPOSE_PATH/dl-clients.yml \
     up -d --remove-orphans 
 
 

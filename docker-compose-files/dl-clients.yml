@@ -1,43 +1,10 @@
 # Download clients
 
-# Transmission: torrent download client with openVPN support
 # Sabnzbd: usenet download client
 
 version: "2.1"
 
 services:
-  transmission:
-    container_name: transmission-openvpn
-    restart: always
-    cap_add:
-      - NET_ADMIN
-    volumes:
-      - $DOCKER_PATH/transmission:/config
-      - $TORRENT_PATH:/data
-    environment:
-      - PUID=$PUID
-      - PGID=$PGID
-      - OPENVPN_PROVIDER=NORDVPN
-      - OPENVPN_USERNAME=$OPENVPN_USERNAME
-      - OPENVPN_PASSWORD=$OPENVPN_PASSWORD
-      - NORDVPN_COUNTRY=GB
-      - NORDVPN_SERVER=uk2023.nordvpn.com
-      - LOCAL_NETWORK=192.168.0.0/16
-      - TRANSMISSION_IDLE_SEEDING_LIMIT_ENABLED=true
-      - TRANSMISSION_RATIO_LIMIT_ENABLED=true
-    logging:
-      driver: json-file
-      options:
-        max-size: 10m
-    ports:
-      # Transmission
-      - "9091:9091"
-      # Soulseek
-      - "6080:6080"
-      - "62828:62828"
-      - "62829:62829"
-    image: haugene/transmission-openvpn
-
   sabnzbd:
     image: lscr.io/linuxserver/sabnzbd:latest
     container_name: sabnzbd
