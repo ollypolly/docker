@@ -54,63 +54,11 @@ create_folder "$DOCKER_PATH/radarr"
 # Prowlarr
 create_folder "$DOCKER_PATH/prowlarr"
 
-# Lidarr
-create_folder "$DOCKER_PATH/lidarr"
-
 # Overseerr
 create_folder "$DOCKER_PATH/overseerr"
 
-# Readarr
-create_folder "$DOCKER_PATH/readarr"
-
 # Portainer
 create_folder "$DOCKER_PATH/portainer"
-
-# Nginx
-create_folder "$DOCKER_PATH/nginxproxymanager"
-create_folder "$DOCKER_PATH/nginxproxymanager/db"
-create_folder "$DOCKER_PATH/nginxproxymanager/letsencrypt"
-
-# Pihole
-create_folder "$DOCKER_PATH/pihole"
-create_folder "$DOCKER_PATH/pihole/pihole"
-create_folder "$DOCKER_PATH/pihole/dnsmasq.d"
-
-# Minecraft
-create_folder "$DOCKER_PATH/mc-paper"
-create_folder "$DOCKER_PATH/mc-backups"
-
-# VSCode
-create_folder "$DOCKER_PATH/vscode"
-create_folder "$DOCKER_PATH/vscode/workspace"
-
-# Comics
-create_folder "$DOCKER_PATH/kapowarr"
-create_folder "$DOCKER_PATH/kapowarr/kapowarr-db"
-create_folder "$DOCKER_PATH/kapowarr/temp_downloads"
-create_folder "$DOCKER_PATH/komga"
-
-# Manga
-create_folder "$DOCKER_PATH/kaizoku"
-create_folder "$DOCKER_PATH/kaizoku/config"
-create_folder "$DOCKER_PATH/kaizoku/logs"
-
-# Ntfy
-create_folder "$DOCKER_PATH/ntfy"
-create_folder "$DOCKER_PATH/ntfy/cache"
-create_folder "$DOCKER_PATH/ntfy/attachments"
-create_file "$DOCKER_PATH/ntfy/webpush.db"
-create_file "$DOCKER_PATH/ntfy/cache.db"
-create_file "$DOCKER_PATH/ntfy/auth.db"
-
-# Uptime kuma
-create_folder "$DOCKER_PATH/uptime-kuma"
-
-# Speedtest tracker
-create_folder "$DOCKER_PATH/speedtest-tracker"
-
-# Tautulli
-create_folder "$DOCKER_PATH/tautulli"
     
 # Run docker compose on all files in docker-compose-files as one command
 sudo docker compose \
