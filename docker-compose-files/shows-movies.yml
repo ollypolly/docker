@@ -28,19 +28,6 @@ services:
       - $MEDIA_PATH/music:/music
     restart: unless-stopped
 
-  tautulli:
-    image: lscr.io/linuxserver/tautulli:latest
-    container_name: tautulli
-    environment:
-      - PUID=$PUID
-      - PGID=$PGID
-      - TZ=$TZ
-    volumes:
-      - $DOCKER_PATH/tautulli:/config
-    ports:
-      - 17795:8181
-    restart: unless-stopped
-
   radarr:
     image: linuxserver/radarr:latest
     container_name: radarr
